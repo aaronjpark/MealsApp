@@ -1,9 +1,17 @@
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
+import * as SystemUI from "expo-system-ui";
+
+SystemUI.setBackgroundColorAsync("#24180f");
 
 export default function App() {
-  return <CategoriesScreen />;
+  return (
+    <>
+      <StatusBar style="light" />
+      <CategoriesScreen />
+    </>
+  );
 }
 
 const styles = StyleSheet.create({
