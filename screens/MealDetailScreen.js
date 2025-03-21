@@ -1,7 +1,8 @@
-import { View, Text, Image, StyleSheet } from "react-native";
+import { View, Text, Image, StyleSheet, ScrollView } from "react-native";
 
 import MealDetails from "../components/MealDetails";
 import Subtitle from "../components/MealDetail/Subtitle";
+import List from "../components/MealDetail/List";
 
 import { MEALS } from "../data/dummy-data";
 
@@ -11,28 +12,33 @@ function MealDetailScreen({ route }) {
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
 
   return (
-    <View>
-      <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
-      <Text style={styles.title}>{selectedMeal.title}</Text>
-      <MealDetails
-        duration={selectedMeal.duration}
-        complexity={selectedMeal.complexity}
-        affordability={selectedMeal.affordability}
-        textStyle={styles.detailText}
-      />
-      <Subtitle>Ingredients</Subtitle>
-      {selectedMeal.ingredients.map((ingredient) => (
-        <Text key={ingredient}>{ingredient}</Text>
-      ))}
-      <Subtitle>Steps</Subtitle>
-      {selectedMeal.steps.map((step) => (
-        <Text key={step}>{step}</Text>
-      ))}
-    </View>
+    <ScrollView style={styles.rootContainer}>
+      <View>
+        <Image style={styles.image} source={{ uri: selectedMeal.imageUrl }} />
+        <Text style={styles.title}>{selectedMeal.title}</Text>
+        <MealDetails
+          duration={selectedMeal.duration}
+          complexity={selectedMeal.complexity}
+          affordability={selectedMeal.affordability}
+          textStyle={styles.detailText}
+        />
+        <View style={styles.listOuterContainer}>
+          <View style={styles.listContainer}>
+            <Subtitle>Ingredients</Subtitle>
+            <List data={selectedMeal.ingredients} />
+            <Subtitle>Steps</Subtitle>
+            <List data={selectedMeal.steps} />
+          </View>
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    marginBottom: 32,
+  },
   image: {
     width: "100%",
     height: 350,
@@ -46,6 +52,12 @@ const styles = StyleSheet.create({
   },
   detailText: {
     color: "white",
+  },
+  listOuterContainer: {
+    alignItems: "center",
+  },
+  listContainer: {
+    width: "80%",
   },
 });
 
