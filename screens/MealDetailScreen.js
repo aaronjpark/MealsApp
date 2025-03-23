@@ -7,7 +7,7 @@ import List from "../components/MealDetail/List";
 import IconButton from "../components/IconButton";
 
 import { MEALS } from "../data/dummy-data";
-import FavoritesContext from "../store/context/favorites-context";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 function MealDetailScreen({ route, navigation }) {
   const favoriteMealsCtx = useContext(FavoritesContext);
